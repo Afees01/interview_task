@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:interview_task/view/favorites_screen/favorites_screen.dart';
+import 'package:interview_task/view/home_screen/home_screen.dart';
 
 class NewsDetails extends StatelessWidget {
   const NewsDetails({super.key});
@@ -14,8 +16,8 @@ class NewsDetails extends StatelessWidget {
                 Container(
                   height: 240,
                   width: double.infinity,
-                  child: Image.network(
-                    'https://via.placeholder.com/400/320',
+                  child: Image.asset(
+                    'assets/images/cardimage1.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -29,20 +31,24 @@ class NewsDetails extends StatelessWidget {
                     ),
                     child: IconButton(
                       icon: Icon(Icons.arrow_back, color: Colors.white),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomeScreen(),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
               ],
             ),
-
-            // Article content
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Date and headline section
                     Container(
                       color: Color(0xFFDDDDDD),
                       padding: EdgeInsets.all(16),
@@ -77,8 +83,6 @@ class NewsDetails extends StatelessWidget {
                         ],
                       ),
                     ),
-
-                    // Article body
                     Padding(
                       padding: EdgeInsets.all(16),
                       child: Column(
@@ -137,8 +141,6 @@ class NewsDetails extends StatelessWidget {
                 ),
               ),
             ),
-
-            // Like button at bottom
             Align(
               alignment: Alignment.bottomRight,
               child: Padding(
@@ -149,10 +151,20 @@ class NewsDetails extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   padding: EdgeInsets.all(12),
-                  child: Icon(
-                    Icons.favorite,
-                    color: Colors.white,
-                    size: 24,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FavoritesScreen(),
+                        ),
+                      );
+                    },
+                    child: Icon(
+                      Icons.favorite,
+                      color: Colors.white,
+                      size: 24,
+                    ),
                   ),
                 ),
               ),
